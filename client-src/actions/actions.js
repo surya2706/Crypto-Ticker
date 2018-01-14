@@ -1,28 +1,13 @@
 export const PRICES = 'PRICES'
 
-export function prices(bitcoin, etherium, ripple, litecoin, bitcoincash){
+export function prices(priceValues){
     const action = {
         type: PRICES,
-        bitcoin,
-        etherium,
-        ripple,
-        litecoin,
-        bitcoincash
+        bitcoin: priceValues.bitcoin,
+        etherium: priceValues.etherium,
+        ripple: priceValues.ripple,
+        litecoin: priceValues.litecoin,
+        bitcoincash: priceValues.bitcoincash
     };
     return action;
-}
-
-export function fetchPrices() {
-    return dispatch => {
-        return fetch("https://koinex.in/api/ticker")
-        .then(response => response.json())
-        .then(json => {
-            let bitcoin = json.prices.BTC
-            let etherium = json.prices.ETH
-            let ripple = json.prices.XRP
-            let litecoin = json.prices.LTC
-            let bitcoincash = json.prices.BCH
-            return dispatch(prices(bitcoin, etherium, ripple, litecoin, bitcoincash));
-        })
-    }
 }

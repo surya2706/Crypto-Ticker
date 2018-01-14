@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Card } from 'semantic-ui-react'
 import Title from './title'
 import CoinBlock from './coin'
-import { fetchPrices } from '../actions/actions'
+import { prices } from '../actions/actions'
 
 class App extends React.Component {
     constructor(props) {
@@ -11,7 +12,10 @@ class App extends React.Component {
 
     componentDidMount() {
         const { dispatch } = this.props;
-        dispatch(fetchPrices());
+        var socket = io.connect('http://localhost:4000')
+        socket.on('priceValues', priceValues => {
+            dispatch(prices(priceValues))
+        })
     };
 
     render() {
@@ -19,11 +23,13 @@ class App extends React.Component {
         return (
             <div>
                 <Title />
+                <Card.Group textAlign="center">
                 <CoinBlock imagePath='./images/bitcoin.png' coin="Bitcoin" symbol='BTC' price={bitcoin}/>
                 <CoinBlock imagePath='./images/ETHERIUM.jpeg' coin="Etherium" symbol='ETH' price={etherium} />
                 <CoinBlock imagePath='./images/ripple.jpeg' coin="Ripple" symbol='XRP' price={ripple} />
                 <CoinBlock imagePath='./images/LITECOIN.jpeg' coin="Litecoin" symbol='LTC' price={litecoin} />
                 <CoinBlock imagePath='./images/BITCOINCASH.png' coin="BitcoinCash" symbol='BCH' price={bitcoincash} />
+                </Card.Group>
             </div>
         )
     }   
@@ -39,6 +45,5 @@ function mapStateToProps(state) {
         bitcoincash: bitcoincash
     }
 }
-
 
 export default connect(mapStateToProps)(App)

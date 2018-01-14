@@ -1,35 +1,40 @@
-const {app, BrowserWindow} = require('electron');
-const path = require('path');
-const url = require('url');
+var express = require('express')
+var path = require('path')
+var socket = require('socket.io')
+var axios = require('axios');
 
-let win;
+var app = express();
 
-function createWindow() {
+var server = app.listen(4000, () => {
+    console.log('listening to requests on port 4000')
+})
 
-    //create browser window
-    win = new BrowserWindow({width: 320, height: 800});
+app.use(express.static(path.join(__dirname, 'public')));
 
-    //load index.html
-    win.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
+var io = socket(server);
 
-    //open devtools
-    // win.webContents.openDevTools();
+io.on('connection', function(socket){
+    console.log('made socket connection');
+    let data = fetchRequest()
+    setInterval(function() {
+        data.then(function(response){
+            messageData = {
+                bitcoin: response.data.prices.BTC,
+                etherium: response.data.prices.ETH,
+                ripple: response.data.prices.XRP,
+                litecoin: response.data.prices.LTC,
+                bitcoincash: response.data.prices.BCH
+            }
+            io.sockets.emit('priceValues', messageData)
+        }, errHandler)},
+    5000)
+})
 
-    win.on('closed', () => {
-        win = null;
-    });
+function fetchRequest() {
+    return axios.get('https://koinex.in/api/ticker')
 }
 
-//Run createWindow function
-app.on('ready', createWindow);
 
-//Quit when all windows are closed
-app.on('window-all-closed', () => {
-    if (process.platform !== 'win32') {
-        app.quit();
-    }
-})
+var errHandler = function(error) {
+    console.log(error);
+}

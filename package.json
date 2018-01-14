@@ -6,29 +6,34 @@
   "scripts": {
     "start": "npm-run-all -p watch server",
     "watch": "webpack --watch --progress",
-    "server": "electron ."
+    "server": "nodemon main.js"
   },
   "author": "Karthik Surya",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.17.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.8",
-    "electron": "^1.7.10",
+    "express": "^4.16.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
+    "redux-socket.io": "^1.4.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.12",
+    "socket.io": "^2.0.4",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0"
   },
   "devDependencies": {
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "electron-connect": "^0.6.3",
+    "nodemon": "^1.14.11",
     "npm-run-all": "^4.1.2",
     "semantic-ui-react": "^0.77.2"
   }

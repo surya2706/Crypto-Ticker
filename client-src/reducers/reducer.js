@@ -1,4 +1,4 @@
-import { PRICES } from '../actions/actions'
+import { PRICES, fetchPrices } from '../actions/actions'
 
 const priceReducer = (state={}, action) => {
     switch(action.type) {
