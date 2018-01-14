@@ -15,7 +15,7 @@ const CoinBlock = (props) => (
             {`${props.symbol}/INR: ${props.price}`}
         </Card.Description>
       </Card.Content>
-      </Card>
+    </Card>
 );
 
 export default CoinBlock;

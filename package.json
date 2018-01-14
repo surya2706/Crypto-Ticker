@@ -18,6 +18,7 @@
     "css-loader": "^0.28.8",
     "express": "^4.16.2",
     "react": "^16.2.0",
+    "react-desktop-notification": "^1.0.8",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
@@ -25,6 +26,7 @@
     "redux-socket.io": "^1.4.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.12",
+    "sfcookies": "^1.0.2",
     "socket.io": "^2.0.4",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0"
